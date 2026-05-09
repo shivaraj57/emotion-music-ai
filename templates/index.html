@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>AI Music Recommendation</title>
+
+    <style>
+
+        body{
+            background:#0f0f0f;
+            color:white;
+            text-align:center;
+            font-family:Arial;
+        }
+
+        h1{
+            color:#00ffff;
+            margin-top:30px;
+            font-size:50px;
+            letter-spacing:2px;
+        }
+
+        .refresh-btn{
+
+            background:#00ffff;
+            color:black;
+            border:none;
+            padding:15px 30px;
+            font-size:18px;
+            border-radius:12px;
+            cursor:pointer;
+            margin-top:15px;
+            margin-bottom:25px;
+            font-weight:bold;
+            transition:0.3s;
+
+        }
+
+        .refresh-btn:hover{
+
+            background:white;
+            transform:scale(1.05);
+
+        }
+
+        .main-box{
+
+            width:85%;
+            margin:auto;
+            background:#1b1b1b;
+            border-radius:25px;
+            padding:30px;
+            box-shadow:0px 0px 20px cyan;
+
+        }
+
+        .emotion{
+
+            color:#00ffff;
+            font-size:30px;
+            margin-bottom:25px;
+
+        }
+
+        img{
+
+            width:700px;
+            border-radius:20px;
+            border:5px solid #00ffff;
+            box-shadow:0px 0px 20px cyan;
+
+        }
+
+        .songs-section{
+
+            margin-top:35px;
+
+        }
+
+        .songs-title{
+
+            color:#00ffff;
+            font-size:35px;
+            margin-bottom:25px;
+
+        }
+
+        .song-card{
+
+            background:#262626;
+            width:70%;
+            margin:auto;
+            margin-top:20px;
+            padding:20px;
+            border-radius:20px;
+            box-shadow:0px 0px 10px #00ffff;
+            transition:0.3s;
+
+        }
+
+        .song-card:hover{
+
+            transform:scale(1.02);
+
+        }
+
+        .song-name{
+
+            font-size:22px;
+            margin-bottom:15px;
+            color:white;
+
+        }
+
+        audio{
+
+            width:90%;
+
+        }
+
+        .no-song{
+
+            background:#262626;
+            width:60%;
+            margin:auto;
+            padding:20px;
+            border-radius:15px;
+            font-size:22px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>AI MUSIC RECOMMENDATION SYSTEM</h1>
+
+    <button onclick="location.reload()" class="refresh-btn">
+        Refresh Recommendation
+    </button>
+
+    <div class="main-box">
+
+        <div class="emotion">
+            Detected Emotion : {{ emotion }}
+        </div>
+
+        <img src="{{ url_for('video') }}">
+
+        <div class="songs-section">
+
+            <div class="songs-title">
+                Recommended Songs
+            </div>
+
+            <div style="margin-bottom:25px;">
+
+                <a href="{{ spotify }}" target="_blank">
+
+                    <button class="refresh-btn">
+                        Open Spotify
+                    </button>
+
+                </a>
+
+                <a href="{{ youtube }}" target="_blank">
+
+                    <button class="refresh-btn">
+                        Open YouTube
+                    </button>
+
+                </a>
+
+            </div>
+
+            {% if songs %}
+
+                {% for song in songs %}
+
+                    <div class="song-card">
+
+                        <div class="song-name">
+                            🎵 {{ song }}
+                        </div>
+
+                        <audio controls>
+
+                            <source
+                            src="{{ url_for('static', filename='songs/' + emotion + '/' + song) }}"
+                            type="audio/mpeg">
+
+                        </audio>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="no-song">
+                    No songs found
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
