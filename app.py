@@ -7,7 +7,10 @@ from tensorflow.keras.models import load_model
 app = Flask(__name__)
 
 # Load emotion model
-model = load_model('emotion_model.h5')
+model = load_model(
+    'emotion_model.h5',
+    compile=False
+)
 
 # Emotion labels
 emotion_labels = [
@@ -23,15 +26,15 @@ emotion_labels = [
 # Current emotion
 current_emotion = "neutral"
 
-# Load face detector
+# Face detector
 face_cascade = cv2.CascadeClassifier(
     'haarcascade_frontalface_default.xml'
 )
 
-# Open webcam
+# Webcam
 camera = cv2.VideoCapture(0)
 
-# Spotify playlists
+# Spotify links
 spotify_links = {
 
     "happy":
@@ -50,7 +53,7 @@ spotify_links = {
     "https://open.spotify.com/"
 }
 
-# YouTube playlists
+# YouTube links
 youtube_links = {
 
     "happy":
