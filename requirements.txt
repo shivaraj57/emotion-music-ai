@@ -1,5 +1,5 @@
 flask
 opencv-python
-tensorflow
+tensorflow-cpu==2.13.0
 numpy
 gunicorn
