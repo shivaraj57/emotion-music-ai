@@ -6,7 +6,7 @@ from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
-# Load model
+# Load emotion model
 model = load_model('emotion_model.h5')
 
 # Emotion labels
@@ -23,15 +23,15 @@ emotion_labels = [
 # Current emotion
 current_emotion = "neutral"
 
-# Face detector
+# Load face detector
 face_cascade = cv2.CascadeClassifier(
     'haarcascade_frontalface_default.xml'
 )
 
-# Webcam
+# Open webcam
 camera = cv2.VideoCapture(0)
 
-# Spotify links
+# Spotify playlists
 spotify_links = {
 
     "happy":
@@ -50,7 +50,7 @@ spotify_links = {
     "https://open.spotify.com/"
 }
 
-# YouTube links
+# YouTube playlists
 youtube_links = {
 
     "happy":
@@ -95,13 +95,13 @@ def generate_frames():
 
             face = gray[y:y+h, x:x+w]
 
-            face = cv2.resize(face, (48,48))
+            face = cv2.resize(face, (48, 48))
 
             face = face / 255.0
 
             face = np.reshape(
                 face,
-                (1,48,48,1)
+                (1, 48, 48, 1)
             )
 
             prediction = model.predict(
@@ -115,21 +115,23 @@ def generate_frames():
 
             current_emotion = emotion
 
+            # Rectangle
             cv2.rectangle(
                 frame,
-                (x,y),
-                (x+w,y+h),
-                (0,255,255),
+                (x, y),
+                (x+w, y+h),
+                (0, 255, 255),
                 3
             )
 
+            # Emotion text
             cv2.putText(
                 frame,
                 emotion,
-                (x,y-10),
+                (x, y-10),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 1,
-                (0,255,255),
+                (0, 255, 255),
                 2
             )
 
@@ -175,4 +177,8 @@ def video():
     )
 
 if __name__ == '__main__':
-    app.run(debug=True)
+
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
