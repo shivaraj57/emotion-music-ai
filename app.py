@@ -2,15 +2,12 @@ from flask import Flask, render_template, Response
 import cv2
 import numpy as np
 import os
-from tensorflow.keras.models import load_model
+from keras.models import load_model
 
 app = Flask(__name__)
 
-# Load emotion model
-model = load_model(
-    'emotion_model.h5',
-    compile=False
-)
+# Load trained model
+model = load_model('emotion_model.h5')
 
 # Emotion labels
 emotion_labels = [
@@ -118,7 +115,7 @@ def generate_frames():
 
             current_emotion = emotion
 
-            # Rectangle
+            # Draw rectangle
             cv2.rectangle(
                 frame,
                 (x, y),
@@ -127,7 +124,7 @@ def generate_frames():
                 3
             )
 
-            # Emotion text
+            # Show emotion text
             cv2.putText(
                 frame,
                 emotion,
