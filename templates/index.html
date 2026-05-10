@@ -22,7 +22,7 @@
 
         .box{
 
-            width:70%;
+            width:80%;
             margin:auto;
             background:#1e1e1e;
             padding:40px;
@@ -32,22 +32,12 @@
 
         }
 
-        button{
+        img{
 
-            background:cyan;
-            color:black;
-            border:none;
-            padding:15px 30px;
-            font-size:20px;
-            border-radius:10px;
-            cursor:pointer;
+            width:700px;
+            border-radius:20px;
+            border:5px solid cyan;
             margin-top:20px;
-
-        }
-
-        button:hover{
-
-            background:white;
 
         }
 
@@ -71,13 +61,11 @@
 
         <h2>AI Music Recommendation System</h2>
 
-        <button>
-            Open Webcam
-        </button>
+        <img src="{{ url_for('video') }}">
 
         <div class="emotion">
 
-            Emotion Result Will Appear Here
+            Webcam Connected Successfully
 
         </div>
 
