@@ -29,6 +29,26 @@
 
         }
 
+        button{
+
+            margin-top:30px;
+            padding:15px 30px;
+            font-size:22px;
+            background:cyan;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+
+        }
+
+        h2{
+
+            margin-top:30px;
+            color:yellow;
+            font-size:40px;
+
+        }
+
     </style>
 
 </head>
@@ -38,6 +58,16 @@
     <h1>Emotion Music AI</h1>
 
     <video id="camera" autoplay></video>
+
+    <br>
+
+    <button onclick="detectEmotion()">
+        Detect Emotion
+    </button>
+
+    <h2 id="result">
+        Emotion Will Appear Here
+    </h2>
 
     <script>
 
@@ -50,6 +80,23 @@
             document.getElementById("camera").srcObject = stream;
 
         });
+
+        function detectEmotion(){
+
+            fetch('/detect', {
+                method:'POST'
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+
+                document.getElementById("result").innerHTML =
+                "Detected Emotion : " + data.emotion;
+
+            });
+
+        }
 
     </script>
 
