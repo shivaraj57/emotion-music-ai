@@ -17,7 +17,7 @@
         h1{
             color:cyan;
             margin-top:40px;
-            font-size:50px;
+            font-size:60px;
         }
 
         .box{
@@ -32,20 +32,32 @@
 
         }
 
-        img{
+        input{
 
-            width:700px;
-            border-radius:20px;
-            border:5px solid cyan;
             margin-top:20px;
+            font-size:20px;
+            color:white;
 
         }
 
-        .emotion{
+        button{
 
-            font-size:30px;
+            margin-top:20px;
+            padding:15px 30px;
+            background:cyan;
+            border:none;
+            border-radius:10px;
+            font-size:20px;
+            cursor:pointer;
+
+        }
+
+        img{
+
+            width:400px;
+            border-radius:20px;
             margin-top:30px;
-            color:yellow;
+            border:5px solid cyan;
 
         }
 
@@ -59,15 +71,25 @@
 
     <div class="box">
 
-        <h2>AI Music Recommendation System</h2>
+        <h2>Upload Image</h2>
 
-        <img src="{{ url_for('video') }}">
+        <form method="POST" enctype="multipart/form-data">
 
-        <div class="emotion">
+            <input type="file" name="image">
 
-            Webcam Connected Successfully
+            <br>
 
-        </div>
+            <button type="submit">
+                Upload
+            </button>
+
+        </form>
+
+        {% if filename %}
+
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}">
+
+        {% endif %}
 
     </div>
 
