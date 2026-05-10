@@ -1,31 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
 
-    filename = None
-
-    if request.method == 'POST':
-
-        image = request.files['image']
-
-        if image:
-
-            os.makedirs("static/uploads", exist_ok=True)
-
-            filepath = os.path.join("static/uploads", image.filename)
-
-            image.save(filepath)
-
-            filename = image.filename
-
-    return render_template(
-        "index.html",
-        filename=filename
-    )
+    return render_template("index.html")
 
 if __name__ == '__main__':
 
