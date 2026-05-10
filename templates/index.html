@@ -105,6 +105,24 @@
 
         }
 
+        .song{
+
+            margin-top:20px;
+            font-size:28px;
+            color:lime;
+
+        }
+
+        a{
+
+            display:block;
+            margin-top:15px;
+            color:cyan;
+            font-size:22px;
+            text-decoration:none;
+
+        }
+
     </style>
 
 </head>
@@ -137,9 +155,27 @@
 
             <div class="emotion" id="result">
 
-                Happy 😊
+                😊
 
             </div>
+
+            <h2 style="margin-top:40px;">
+                Recommended Song
+            </h2>
+
+            <div class="song" id="song">
+
+                Song will appear here
+
+            </div>
+
+            <a id="youtube" target="_blank">
+                Open YouTube
+            </a>
+
+            <a id="spotify" target="_blank">
+                Open Spotify
+            </a>
 
             <h2 style="margin-top:40px;">
                 Mood Analysis
@@ -214,6 +250,15 @@
 
                 document.getElementById("result").innerHTML =
                 data.emotion;
+
+                document.getElementById("song").innerHTML =
+                data.song;
+
+                document.getElementById("youtube").href =
+                data.youtube;
+
+                document.getElementById("spotify").href =
+                data.spotify;
 
             });
 
