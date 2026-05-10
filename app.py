@@ -1,8 +1,12 @@
 from flask import Flask, render_template, jsonify
 import os
 import random
+from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
+
+# Load NEW compatible model
+model = load_model("emotion_model.keras")
 
 emotion_data = {
 
@@ -65,6 +69,7 @@ def home():
 @app.route('/detect', methods=['POST'])
 def detect():
 
+    # TEMP prediction
     emotion = random.choice(
         list(emotion_data.keys())
     )
