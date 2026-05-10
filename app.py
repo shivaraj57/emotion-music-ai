@@ -3,12 +3,15 @@ import os
 import random
 import cv2
 import numpy as np
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
-# Load model
-model = load_model("emotion_model.h5")
+# Load trained model
+model = load_model(
+    "emotion_model.h5",
+    compile=False
+)
 
 # Emotion labels
 emotion_labels = [
@@ -30,14 +33,21 @@ face_cascade = cv2.CascadeClassifier(
 # Webcam
 camera = cv2.VideoCapture(0)
 
+# Songs for each emotion
 emotion_data = {
 
     "Happy": {
         "songs":[
             {
-                "name":"Shape of You",
-                "youtube":"https://youtube.com",
-                "spotify":"https://spotify.com"
+                "name":"Shape of You - Ed Sheeran",
+                "youtube":"https://www.youtube.com/watch?v=JGwWNGJdvx8",
+                "spotify":"https://open.spotify.com/"
+            },
+
+            {
+                "name":"Believer - Imagine Dragons",
+                "youtube":"https://www.youtube.com/watch?v=7wtfhZwyrcc",
+                "spotify":"https://open.spotify.com/"
             }
         ]
     },
@@ -45,9 +55,9 @@ emotion_data = {
     "Sad": {
         "songs":[
             {
-                "name":"Fix You",
-                "youtube":"https://youtube.com",
-                "spotify":"https://spotify.com"
+                "name":"Fix You - Coldplay",
+                "youtube":"https://www.youtube.com/watch?v=k4V3Mo61fJM",
+                "spotify":"https://open.spotify.com/"
             }
         ]
     },
@@ -55,9 +65,9 @@ emotion_data = {
     "Angry": {
         "songs":[
             {
-                "name":"Numb",
-                "youtube":"https://youtube.com",
-                "spotify":"https://spotify.com"
+                "name":"Numb - Linkin Park",
+                "youtube":"https://www.youtube.com/watch?v=kXYiU_JCYtU",
+                "spotify":"https://open.spotify.com/"
             }
         ]
     },
@@ -65,9 +75,9 @@ emotion_data = {
     "Neutral": {
         "songs":[
             {
-                "name":"Perfect",
-                "youtube":"https://youtube.com",
-                "spotify":"https://spotify.com"
+                "name":"Perfect - Ed Sheeran",
+                "youtube":"https://www.youtube.com/watch?v=2Vv-BfVoq4g",
+                "spotify":"https://open.spotify.com/"
             }
         ]
     },
@@ -75,9 +85,9 @@ emotion_data = {
     "Surprise": {
         "songs":[
             {
-                "name":"Faded",
-                "youtube":"https://youtube.com",
-                "spotify":"https://spotify.com"
+                "name":"Blinding Lights - Weeknd",
+                "youtube":"https://www.youtube.com/watch?v=4NRXx6U8ABQ",
+                "spotify":"https://open.spotify.com/"
             }
         ]
     }
@@ -116,7 +126,10 @@ def detect():
 
         face = gray[y:y+h, x:x+w]
 
-        face = cv2.resize(face, (48,48))
+        face = cv2.resize(
+            face,
+            (48,48)
+        )
 
         face = face / 255.0
 
