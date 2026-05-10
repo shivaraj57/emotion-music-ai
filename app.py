@@ -1,17 +1,9 @@
 from flask import Flask, render_template, jsonify
 import os
 import random
-from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
-# Load model
-model = load_model(
-    "emotion_model.h5",
-    compile=False
-)
-
-# Songs
 emotion_data = {
 
     "Happy": {
@@ -19,12 +11,6 @@ emotion_data = {
             {
                 "name":"Shape of You - Ed Sheeran",
                 "youtube":"https://www.youtube.com/watch?v=JGwWNGJdvx8",
-                "spotify":"https://open.spotify.com/"
-            },
-
-            {
-                "name":"Believer - Imagine Dragons",
-                "youtube":"https://www.youtube.com/watch?v=7wtfhZwyrcc",
                 "spotify":"https://open.spotify.com/"
             }
         ]
@@ -79,7 +65,6 @@ def home():
 @app.route('/detect', methods=['POST'])
 def detect():
 
-    # Temporary random prediction
     emotion = random.choice(
         list(emotion_data.keys())
     )
