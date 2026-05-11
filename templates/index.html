@@ -7,30 +7,47 @@
 
     <style>
 
-        body{
+        *{
             margin:0;
-            background:black;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            background:
+            radial-gradient(circle at top,
+            #111,
+            black);
+
             font-family:Arial;
             color:white;
-            text-align:center;
+            overflow-x:hidden;
+            min-height:100vh;
+
         }
 
         h1{
 
+            text-align:center;
+            margin-top:25px;
+            font-size:75px;
             color:cyan;
-            font-size:70px;
-            margin-top:20px;
-            text-shadow:0px 0px 20px cyan;
+            text-shadow:
+            0px 0px 20px cyan,
+            0px 0px 40px cyan;
 
         }
 
         .main{
 
+            width:95%;
+            margin:auto;
+            margin-top:30px;
+
             display:flex;
             justify-content:center;
-            align-items:flex-start;
             gap:40px;
-            margin-top:30px;
             flex-wrap:wrap;
 
         }
@@ -38,88 +55,165 @@
         .camera-box{
 
             background:#111;
-            padding:20px;
-            border-radius:20px;
-            box-shadow:0px 0px 20px cyan;
+            border-radius:25px;
+            padding:25px;
+
+            box-shadow:
+            0px 0px 20px cyan,
+            0px 0px 50px rgba(0,255,255,0.3);
 
         }
 
         video{
 
-            width:700px;
+            width:720px;
             border-radius:20px;
             border:4px solid cyan;
 
         }
 
-        .side-panel{
+        .panel{
 
-            width:320px;
+            width:350px;
+
             background:#111;
-            border-radius:20px;
+
+            border-radius:25px;
+
             padding:30px;
-            box-shadow:0px 0px 20px cyan;
+
+            box-shadow:
+            0px 0px 20px cyan,
+            0px 0px 50px rgba(0,255,255,0.3);
 
         }
 
         .emotion{
 
-            font-size:60px;
-            color:yellow;
             margin-top:20px;
+            font-size:65px;
+            color:yellow;
+            text-align:center;
 
         }
 
-        button{
+        .emoji{
+
+            font-size:80px;
+            margin-top:10px;
+            text-align:center;
+
+        }
+
+        .song{
+
+            margin-top:30px;
+            font-size:28px;
+            color:lime;
+            text-align:center;
+
+        }
+
+        .buttons{
 
             margin-top:25px;
-            padding:15px 35px;
-            font-size:22px;
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+
+        }
+
+        a{
+
+            text-decoration:none;
+
+        }
+
+        .link-btn{
+
+            width:100%;
+
+            padding:15px;
+
             border:none;
-            border-radius:12px;
-            background:cyan;
+
+            border-radius:15px;
+
+            font-size:22px;
+
             cursor:pointer;
+
+            background:cyan;
+
+            color:black;
+
+            font-weight:bold;
+
+            transition:0.3s;
+
+        }
+
+        .link-btn:hover{
+
+            transform:scale(1.05);
+
+            background:white;
+
+        }
+
+        .detect-btn{
+
+            margin-top:25px;
+
+            width:100%;
+
+            padding:18px;
+
+            font-size:26px;
+
+            border:none;
+
+            border-radius:15px;
+
+            background:linear-gradient(
+            45deg,
+            cyan,
+            blue
+            );
+
+            color:white;
+
+            cursor:pointer;
+
+            font-weight:bold;
+
+            transition:0.3s;
+
+            box-shadow:
+            0px 0px 20px cyan;
+
+        }
+
+        .detect-btn:hover{
+
+            transform:scale(1.03);
 
         }
 
         .wave{
 
+            margin-top:35px;
             width:100%;
             height:120px;
-            margin-top:30px;
-
-        }
-
-        .wave svg{
-
-            width:100%;
-            height:100%;
 
         }
 
         .tip{
 
             margin-top:20px;
-            font-size:20px;
+            text-align:center;
             color:#aaa;
-
-        }
-
-        .song{
-
-            margin-top:20px;
-            font-size:28px;
-            color:lime;
-
-        }
-
-        a{
-
-            display:block;
-            margin-top:15px;
-            color:cyan;
-            font-size:22px;
-            text-decoration:none;
+            font-size:20px;
 
         }
 
@@ -137,55 +231,78 @@
 
             <video id="camera" autoplay></video>
 
-            <br>
-
-            <button onclick="detectEmotion()">
-                Capture & Detect
+            <button
+                class="detect-btn"
+                onclick="detectEmotion()"
+            >
+                🎵 Capture & Detect
             </button>
 
             <div class="tip">
-                Look at camera for best result
+                Look at camera and click detect
             </div>
 
         </div>
 
-        <div class="side-panel">
+        <div class="panel">
 
-            <h2>Detected Emotion</h2>
+            <h2 style="text-align:center;">
+                Detected Emotion
+            </h2>
 
-            <div class="emotion" id="result">
+            <div
+                class="emotion"
+                id="emotion"
+            >
+                Happy
+            </div>
 
+            <div
+                class="emoji"
+                id="emoji"
+            >
                 😊
-
             </div>
 
-            <h2 style="margin-top:40px;">
-                Recommended Song
-            </h2>
-
-            <div class="song" id="song">
-
+            <div
+                class="song"
+                id="song"
+            >
                 Song will appear here
-
             </div>
 
-            <a id="youtube" target="_blank">
-                Open YouTube
-            </a>
+            <div class="buttons">
 
-            <a id="spotify" target="_blank">
-                Open Spotify
-            </a>
+                <a
+                    id="youtube"
+                    target="_blank"
+                >
+                    <button class="link-btn">
+                        ▶ Open YouTube
+                    </button>
+                </a>
 
-            <h2 style="margin-top:40px;">
-                Mood Analysis
-            </h2>
+                <a
+                    id="spotify"
+                    target="_blank"
+                >
+                    <button class="link-btn">
+                        🎧 Open Spotify
+                    </button>
+                </a>
+
+            </div>
 
             <div class="wave">
 
-                <svg viewBox="0 0 500 150">
+                <svg
+                    viewBox="0 0 500 150"
+                    width="100%"
+                    height="100%"
+                >
 
                     <path
+
                         d="M0 80 
                            Q 25 20 50 80
                            T 100 80
@@ -197,13 +314,21 @@
                            T 400 80
                            T 450 80
                            T 500 80"
+
                         stroke="cyan"
+
                         fill="transparent"
-                        stroke-width="5">
+
+                        stroke-width="5"
+
+                    >
 
                         <animate
+
                             attributeName="d"
+
                             dur="2s"
+
                             repeatCount="indefinite"
 
                             values="
@@ -212,7 +337,9 @@
                             M0 80 Q25 120 50 80 T100 80 T150 80 T200 80 T250 80 T300 80 T350 80 T400 80 T450 80 T500 80;
 
                             M0 80 Q25 20 50 80 T100 80 T150 80 T200 80 T250 80 T300 80 T350 80 T400 80 T450 80 T500 80
-                            " />
+                            "
+
+                        />
 
                     </path>
 
@@ -227,12 +354,16 @@
     <script>
 
         navigator.mediaDevices.getUserMedia({
+
             video:true
+
         })
 
         .then(function(stream){
 
-            document.getElementById("camera").srcObject = stream;
+            document.getElementById(
+                "camera"
+            ).srcObject = stream;
 
         });
 
@@ -248,17 +379,25 @@
 
             .then(data => {
 
-                document.getElementById("result").innerHTML =
-                data.emotion;
+                document.getElementById(
+                    "emotion"
+                ).innerHTML = data.emotion;
 
-                document.getElementById("song").innerHTML =
-                data.song;
+                document.getElementById(
+                    "emoji"
+                ).innerHTML = data.emoji;
 
-                document.getElementById("youtube").href =
-                data.youtube;
+                document.getElementById(
+                    "song"
+                ).innerHTML = data.song;
 
-                document.getElementById("spotify").href =
-                data.spotify;
+                document.getElementById(
+                    "youtube"
+                ).href = data.youtube;
+
+                document.getElementById(
+                    "spotify"
+                ).href = data.spotify;
 
             });
 
